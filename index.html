@@ -410,6 +410,37 @@ body::before{background:var(--noite)}
 .cartao--neon:hover{border-color:transparent}
 @media (max-width:820px){.hero__banner{height:clamp(380px,110vw,520px);margin-top:-64px}.hero__corpo{margin-top:-110px}}
 
+/* ---------- escopo completo: pilares, série, ofertas em 3 ---------- */
+.hero__acoes{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px}
+.link-seta{font-size:15px;font-weight:700;text-decoration:none;border-bottom:1px solid var(--tinta-suave);padding-bottom:2px}
+.link-seta:hover{border-color:var(--destaque);color:var(--destaque)}
+.ofertas.ofertas--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cartao__tag.suave{color:var(--tinta-suave)}
+.pilares{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.pilar{background:var(--superficie);border:1px solid var(--linha);border-radius:var(--raio-sm);padding:24px 22px 26px;display:flex;flex-direction:column;gap:12px}
+.pilar__arte{width:100%;height:auto;margin-bottom:12px;overflow:visible}
+.pilar p{margin:0;font-size:15px;line-height:1.5;color:var(--tinta-suave)}
+.pulso{stroke-dasharray:420;stroke-dashoffset:0}
+@media (prefers-reduced-motion:no-preference){.pulso{animation:pulsar 3.2s ease-in-out infinite}}
+@keyframes pulsar{0%{stroke-dashoffset:420}55%,100%{stroke-dashoffset:0}}
+.semana-bloco{margin-top:clamp(56px,7vw,88px)}
+.serie{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,88px);align-items:start}
+.serie__intro{display:flex;flex-direction:column;gap:20px}
+.passos{list-style:none;margin:8px 0 0;padding:0;counter-reset:p;border-top:1px solid var(--linha)}
+.passos li{counter-increment:p;display:flex;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--linha);font-size:16px}
+.passos li::before{content:counter(p,decimal-leading-zero);font-size:12px;font-weight:700;color:var(--destaque);font-variant-numeric:tabular-nums}
+.filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filtro{font:700 13px var(--f-texto);color:var(--tinta-suave);background:transparent;border:1px solid var(--linha);border-radius:var(--raio-pilula);padding:0 16px;min-height:40px;cursor:pointer}
+.filtro:hover{color:var(--tinta);border-color:var(--tinta-suave)}
+.filtro.ativo{background:var(--destaque);color:var(--sobre-destaque);border-color:var(--destaque)}
+.temas{list-style:none;margin:0;padding:0;border-top:1px solid var(--linha)}
+.temas li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--linha)}
+.temas li span{font-family:var(--f-display);font-weight:700;font-size:clamp(18px,1.8vw,22px);letter-spacing:-.02em;line-height:1.2}
+.temas li em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-suave);white-space:nowrap}
+@media (max-width:980px){.ofertas.ofertas--3{grid-template-columns:minmax(0,1fr)}.pilares{grid-template-columns:repeat(2,minmax(0,1fr))}.serie{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:820px){#estacoes text{font-size:21px;letter-spacing:1px}.contato__pista{aspect-ratio:1.35/1}}
+@media (max-width:560px){.pilares{grid-template-columns:minmax(0,1fr)}.temas li{flex-direction:column;gap:6px}}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .letreiro__trilho{animation:none}
@@ -428,9 +459,9 @@ body::before{background:var(--noite)}
     </a>
     <nav class="nav" id="menu" aria-label="Principal">
       <a href="#ofertas">Como treinar comigo</a>
-      <a href="#sobre">Sobre</a>
+      <a href="#pilares">Do que eu falo</a>
       <a href="#own-your-pace">Own Your Pace</a>
-      <a href="#depoimentos">Depoimentos</a>
+      <a href="#serie">Isso funciona?</a>
       <a href="#contato">Contato</a>
     </nav>
     <div class="sociais">
@@ -451,7 +482,7 @@ body::before{background:var(--noite)}
 <section class="faixa hero" id="inicio">
     <div class="hero__banner">
       <div class="foto">
-        <img src="img/hero-largada.jpg" alt="Mãos e tênis de uma corredora na linha de largada da pista" fetchpriority="high">
+        <img src="img/hero-largada.jpg" alt="Mãos e tênis de uma atleta na linha de largada" fetchpriority="high">
       </div>
       <svg class="hero__fita" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <defs>
@@ -460,30 +491,33 @@ body::before{background:var(--noite)}
         </defs>
         <use href="#raia-1" fill="none" stroke="#0d1b2a" stroke-opacity=".82" stroke-width="112"/>
         <use href="#raia-1" fill="none" stroke="#c8f135" stroke-width="40"/>
-        <text class="fita-texto" dy="7.5"><textPath id="fita-1" href="#raia-1" startOffset="0">corra no seu ritmo  ●  constância antes de distância  ●  começar não precisa doer  ●  corra no seu ritmo  ●  constância antes de distância  ●  começar não precisa doer  ●  corra no seu ritmo  ●  constância antes de distância  ●  começar não precisa doer  ●  </textPath></text>
+        <text class="fita-texto" dy="7.5"><textPath id="fita-1" href="#raia-1" startOffset="0">força  ●  fisiologia  ●  biomecânica  ●  no seu ritmo  ●  força  ●  fisiologia  ●  biomecânica  ●  no seu ritmo  ●  força  ●  fisiologia  ●  biomecânica  ●  no seu ritmo  ●  </textPath></text>
         <use href="#raia-2" fill="none" stroke="#f2efe7" stroke-width="40"/>
-        <text class="fita-texto" dy="7.5"><textPath id="fita-2" href="#raia-2" startOffset="0">técnica explicada de forma simples  ●  segurança  ●  processo  ●  técnica explicada de forma simples  ●  segurança  ●  processo  ●  </textPath></text>
+        <text class="fita-texto" dy="7.5"><textPath id="fita-2" href="#raia-2" startOffset="0">corrida  ●  crossfit  ●  musculação  ●  corrida  ●  crossfit  ●  musculação  ●  </textPath></text>
       </svg>
     </div>
   <div class="miolo">
     <div class="hero__corpo">
       <div class="hero__titulo">
         <span class="rotulo suave">Stella Maz · Educadora física</span>
-        <h1 class="display">Evolua <span class="serif">no seu ritmo</span>.</h1>
+        <h1 class="display">Treine para <span class="serif">durar</span>.</h1>
       </div>
       <div class="hero__lado">
-        <p class="corpo">Treino e corrida com consciência corporal, para quem está começando sem exagero e sem medo de se machucar.</p>
-        <div><a class="botao botao--principal" href="#own-your-pace">Quero começar no meu ritmo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        <p class="corpo">Força e fisiologia aplicadas a quem quer treinar por muitos anos. Corrida, CrossFit e musculação com base em ciência, não em tendência.</p>
+        <div class="hero__acoes">
+          <a class="botao botao--principal" href="#ofertas">Quero treinar com acompanhamento <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+          <a class="link-seta" href="#own-your-pace">Começar a correr com o Own Your Pace</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===================== LETREIRO ===================== -->
-<div class="letreiro" aria-label="Constância antes de distância. Começar a correr não precisa doer. Turma fundadora com 15 vagas.">
+<div class="letreiro" aria-label="Um corpo que aguenta. Fisiologia, não tendência. Força para quem quer durar. Treinar com consciência.">
   <div class="letreiro__trilho" aria-hidden="true">
-    <div class="letreiro__item"><span>Constância antes de <span class="serif">distância</span></span><i class="letreiro__ponto"></i><span>Começar a correr não precisa doer</span><i class="letreiro__ponto"></i><span>Turma fundadora · 15 vagas · R$ 97</span><i class="letreiro__ponto"></i><span>Treinar com <span class="serif">consciência</span></span><i class="letreiro__ponto"></i></div>
-    <div class="letreiro__item"><span>Constância antes de <span class="serif">distância</span></span><i class="letreiro__ponto"></i><span>Começar a correr não precisa doer</span><i class="letreiro__ponto"></i><span>Turma fundadora · 15 vagas · R$ 97</span><i class="letreiro__ponto"></i><span>Treinar com <span class="serif">consciência</span></span><i class="letreiro__ponto"></i></div>
+    <div class="letreiro__item"><span>Um corpo que <span class="serif">aguenta</span></span><i class="letreiro__ponto"></i><span>Fisiologia, não tendência</span><i class="letreiro__ponto"></i><span>Força para quem quer durar</span><i class="letreiro__ponto"></i><span>Treinar com <span class="serif">consciência</span></span><i class="letreiro__ponto"></i></div>
+    <div class="letreiro__item"><span>Um corpo que <span class="serif">aguenta</span></span><i class="letreiro__ponto"></i><span>Fisiologia, não tendência</span><i class="letreiro__ponto"></i><span>Força para quem quer durar</span><i class="letreiro__ponto"></i><span>Treinar com <span class="serif">consciência</span></span><i class="letreiro__ponto"></i></div>
   </div>
 </div>
 
@@ -493,44 +527,98 @@ body::before{background:var(--noite)}
     <div class="cabeca cabeca--linha">
       <div class="cabeca">
         <span class="rotulo suave">Como treinar comigo</span>
-        <h2 class="titulo">Quatro portas, <span class="serif">um mesmo cuidado</span>.</h2>
+        <h2 class="titulo">Três caminhos, <span class="serif">um mesmo cuidado</span>.</h2>
       </div>
-      <a class="botao botao--escuro" href="#contato">Quero conversar</a>
     </div>
 
-    <div class="ofertas">
-      <a class="cartao" href="#contato">
-        <span class="cartao__num">01</span>
-        <span class="cartao__base">
-          <span class="subtitulo">Coaching individual</span>
-          <p>Treino planejado para você, com ajustes semana a semana.</p>
-        </span>
-      </a>
+    <div class="ofertas ofertas--3">
       <div class="c2-envolve">
-        <a class="cartao cartao--neon" href="#own-your-pace">
-          <span class="cartao__num">02</span>
+        <a class="cartao cartao--neon" href="#contato">
+          <span class="cartao__num">01</span>
           <span class="cartao__base">
-            <span class="cartao__tag">Turma fundadora · R$ 97</span>
-            <span class="subtitulo">Own Your Pace</span>
-            <p>Comece a correr do zero, com o porquê de cada treino.</p>
+            <span class="cartao__tag">Presencial ou online</span>
+            <span class="subtitulo">Acompanhamento</span>
+            <p>Treino planejado para você, com ajustes semana a semana e alguém de olho na técnica.</p>
           </span>
         </a>
         <span class="canto-seta" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4 4 12M4 6v6h6"/></svg></span>
       </div>
-      <a class="cartao" href="#contato">
+      <a class="cartao" href="#own-your-pace">
+        <span class="cartao__num">02</span>
+        <span class="cartao__base">
+          <span class="cartao__tag suave">Turma fundadora · R$ 97</span>
+          <span class="subtitulo">Own Your Pace</span>
+          <p>Guia para começar a correr do zero: áudios, planilha com o porquê de cada treino e encontro ao vivo.</p>
+        </span>
+      </a>
+      <a class="cartao" href="#serie">
         <span class="cartao__num">03</span>
         <span class="cartao__base">
-          <span class="subtitulo">Publicações</span>
-          <p>Fortalecimento, dor no começo e constância, explicados de forma simples.</p>
+          <span class="cartao__tag suave">Gratuito · YouTube e site</span>
+          <span class="subtitulo">Isso funciona?</span>
+          <p>A série que pega o que viraliza sobre treino e explica, com fisiologia, o que é verdade e o que fazer no lugar.</p>
         </span>
       </a>
-      <a class="cartao" href="#contato">
-        <span class="cartao__num">04</span>
-        <span class="cartao__base">
-          <span class="subtitulo">YouTube</span>
-          <p>Mobilidade, educativos de corrida e força para fazer em casa.</p>
-        </span>
-      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PILARES ===================== -->
+<section class="faixa secao" id="pilares">
+  <div class="miolo">
+    <div class="cabeca">
+      <span class="rotulo suave">Do que eu falo</span>
+      <h2 class="titulo">O corpo explicado, <span class="serif">sem achismo</span>.</h2>
+      <p class="corpo suave">Corrida, CrossFit e musculação partem da mesma base. Entender essa base é o que faz o treino durar.</p>
+    </div>
+    <div class="pilares">
+      <article class="pilar">
+        <svg class="pilar__arte" viewBox="0 0 240 120" aria-hidden="true">
+          <line x1="0" y1="70" x2="240" y2="70" stroke="#1a2a3a" stroke-width="1"/>
+          <path class="pulso" d="M0 70 H52 L62 70 L70 52 L78 70 L88 70 L96 18 L106 104 L114 70 L132 70 L142 58 L154 70 H240" fill="none" stroke="#c8f135" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <text x="0" y="112" fill="#a3a9ad" font-size="11" font-family="Syne, sans-serif" letter-spacing="1.2">FC · ADAPTAÇÃO</text>
+        </svg>
+        <h3 class="subtitulo">Fisiologia aplicada</h3>
+        <p>O que muda no corpo nas primeiras semanas de treino, e por que o resultado leva tempo.</p>
+      </article>
+      <article class="pilar">
+        <svg class="pilar__arte" viewBox="0 0 240 120" aria-hidden="true">
+          <path d="M150 104 A40 40 0 0 0 121 66" fill="none" stroke="#c8f135" stroke-width="2" stroke-dasharray="3 4"/>
+          <line x1="70" y1="14" x2="124" y2="74" stroke="#f2efe7" stroke-width="3" stroke-linecap="round"/>
+          <line x1="124" y1="74" x2="104" y2="112" stroke="#f2efe7" stroke-width="3" stroke-linecap="round"/>
+          <line x1="104" y1="112" x2="140" y2="112" stroke="#f2efe7" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="70" cy="14" r="5" fill="#050c14" stroke="#f2efe7" stroke-width="2"/>
+          <circle cx="124" cy="74" r="6" fill="#c8f135"/>
+          <circle cx="104" cy="112" r="5" fill="#050c14" stroke="#f2efe7" stroke-width="2"/>
+          <text x="160" y="86" fill="#c8f135" font-size="20" font-family="Syne, sans-serif" font-weight="700">92°</text>
+          <text x="160" y="104" fill="#a3a9ad" font-size="11" font-family="Syne, sans-serif" letter-spacing="1.2">JOELHO</text>
+        </svg>
+        <h3 class="subtitulo">Biomecânica</h3>
+        <p>Cadência, pisada e alinhamento: como o movimento distribui a carga nas articulações.</p>
+      </article>
+      <article class="pilar">
+        <svg class="pilar__arte" viewBox="0 0 240 120" aria-hidden="true">
+          <g fill="#1a2a3a"><rect x="0" y="78" width="22" height="22"/><rect x="30" y="72" width="22" height="28"/><rect x="60" y="66" width="22" height="34"/><rect x="90" y="60" width="22" height="40"/></g>
+          <g fill="#f2efe7"><rect x="120" y="52" width="22" height="48"/><rect x="150" y="42" width="22" height="58"/><rect x="180" y="32" width="22" height="68"/></g>
+          <rect x="210" y="20" width="22" height="80" fill="#c8f135"/>
+          <text x="0" y="116" fill="#a3a9ad" font-size="11" font-family="Syne, sans-serif" letter-spacing="1.2">SEM 1</text>
+          <text x="232" y="116" text-anchor="end" fill="#a3a9ad" font-size="11" font-family="Syne, sans-serif" letter-spacing="1.2">SEM 8</text>
+        </svg>
+        <h3 class="subtitulo">Força para durar</h3>
+        <p>Carga progressiva e exercícios que protegem joelho, quadril e coluna de quem treina por anos.</p>
+      </article>
+      <article class="pilar">
+        <svg class="pilar__arte" viewBox="0 0 240 120" aria-hidden="true">
+          <g font-family="Syne, sans-serif" font-size="13">
+            <circle cx="12" cy="34" r="10" fill="none" stroke="#a3a9ad" stroke-width="1.5"/><path d="M8 30l8 8M16 30l-8 8" stroke="#a3a9ad" stroke-width="1.5"/>
+            <text x="32" y="39" fill="#a3a9ad" text-decoration="line-through">treino de 7 min seca barriga</text>
+            <circle cx="12" cy="84" r="10" fill="#c8f135"/><path d="M7 84l4 4 7-8" fill="none" stroke="#050c14" stroke-width="2"/>
+            <text x="32" y="89" fill="#f2efe7">gasto total + força + constância</text>
+          </g>
+        </svg>
+        <h3 class="subtitulo">Isso funciona?</h3>
+        <p>O que viraliza, revisado com calma: o que tem de verdade, onde erra e o que fazer no lugar.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -538,11 +626,11 @@ body::before{background:var(--noite)}
 <!-- ===================== SOBRE ===================== -->
 <section class="faixa secao" id="sobre">
   <div class="miolo sobre">
-    <div class="foto"><img src="img/stella-contraplongee.jpg" alt="Corredora vista de baixo para cima, em plena passada" loading="lazy"></div>
+    <div class="foto"><img src="img/stella-contraplongee.jpg" alt="Atleta vista de baixo para cima, em plena passada" loading="lazy"></div>
     <div class="sobre__texto">
       <span class="rotulo suave">Quem é a Stella</span>
-      <h2 class="titulo">Aprendi a correr <span class="serif">errando</span>. Você não precisa.</h2>
-      <p class="corpo">Comecei com canelite, tênis errado e planilhas soltas da internet. Hoje estudo, treino e dou aula, e junto aqui o que eu gostaria de ter sabido no começo.</p>
+      <h2 class="titulo">Estudo o corpo para você treinar <span class="serif">por anos</span>.</h2>
+      <p class="corpo">Sou educadora física e treinadora de CrossFit. Trabalho força, corrida e musculação com base em fisiologia. Também errei muito no começo, e é por isso que explico o porquê de cada treino.</p>
       <ul class="credenciais">
         <li><b>Educação física</b><span>Formação completa</span></li>
         <li><b>CrossFit L1</b><span>Treinadora na Kyosei</span></li>
@@ -558,13 +646,13 @@ body::before{background:var(--noite)}
   <div class="miolo">
     <div class="cabeca cabeca--linha">
       <div class="cabeca">
-        <span class="rotulo" style="color:var(--destaque)">Own Your Pace</span>
+        <span class="rotulo" style="color:var(--destaque)">Own Your Pace · guia de corrida</span>
         <h2 class="titulo">Comece a correr <span class="serif">sem medo</span>.</h2>
         <p class="corpo suave">Para quem nunca correu ou já tentou e parou.</p>
       </div>
       <div class="produto__preco">
-        <span class="rotulo suave">15 vagas · R$ 97</span>
-        <a class="botao botao--principal" href="#contato">Quero entrar na turma</a>
+        <span class="rotulo suave">Turma fundadora · 15 vagas · R$ 97</span>
+        <a class="botao botao--principal" href="#contato">Entrar na lista de interesse</a>
       </div>
     </div>
 
@@ -614,27 +702,18 @@ body::before{background:var(--noite)}
       <button class="redondo" type="button" id="carrossel-ant" aria-label="Anterior"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
       <button class="redondo" type="button" id="carrossel-prox" aria-label="Próximo"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>
     </div>
-  </div>
-</section>
 
-<!-- ===================== SEMANA DA PLANILHA ===================== -->
-<section class="faixa secao" id="planilha">
-  <div class="miolo">
-    <div class="cabeca">
-      <span class="rotulo suave">Processo</span>
-      <h2 class="titulo">Uma semana <span class="serif">de cada vez</span>.</h2>
-      <p class="corpo suave">O tempo correndo cresce devagar. O fortalecimento nunca sai da semana.</p>
+    <div class="semana-bloco">
+      <div class="semana__barra">
+        <span><span class="rotulo" id="semana-rotulo">Semana 1</span> <span id="semana-resumo" class="suave">Corrida 1 min · caminhada 2 min</span></span>
+        <span class="semana__setas">
+          <button class="redondo redondo--escuro" type="button" id="semana-ant" aria-label="Semana anterior"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
+          <button class="redondo redondo--escuro" type="button" id="semana-prox" aria-label="Próxima semana"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>
+        </span>
+      </div>
+      <div class="semana" id="semana" aria-live="polite"></div>
+      <p class="semana__nota">Uma semana da planilha, como exemplo. O tempo correndo cresce devagar e o fortalecimento nunca sai da semana.</p>
     </div>
-
-    <div class="semana__barra">
-      <span><span class="rotulo" id="semana-rotulo">Semana 1</span> <span id="semana-resumo" class="suave">Corrida 1 min · caminhada 2 min</span></span>
-      <span class="semana__setas">
-        <button class="redondo redondo--escuro" type="button" id="semana-ant" aria-label="Semana anterior"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
-        <button class="redondo redondo--escuro" type="button" id="semana-prox" aria-label="Próxima semana"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>
-      </span>
-    </div>
-    <div class="semana" id="semana" aria-live="polite"></div>
-    <p class="semana__nota">Exemplo ilustrativo. A planilha real vem com o guia explicando cada sessão.</p>
   </div>
 </section>
 
@@ -642,12 +721,49 @@ body::before{background:var(--noite)}
 <section class="faixa" aria-label="Frase da Stella" style="padding-top:clamp(72px,10vw,120px)">
   <div class="miolo">
     <figure class="mural">
-      <img src="img/chegada.jpg" alt="Corredora sorrindo com os braços erguidos ao cruzar a chegada de uma prova" loading="lazy">
+      <img src="img/chegada.jpg" alt="Atleta sorrindo com os braços erguidos ao cruzar a chegada de uma prova" loading="lazy">
       <figcaption>
         <span class="rotulo">Stella Maz</span>
-        <p class="mural__frase">Constância vem<br>antes de <span class="serif">distância</span>.</p>
+        <p class="mural__frase">Fisiologia,<br>não <span class="serif">tendência</span>.</p>
       </figcaption>
     </figure>
+  </div>
+</section>
+
+<!-- ===================== SÉRIE ===================== -->
+<section class="faixa secao" id="serie">
+  <div class="miolo serie">
+    <div class="serie__intro">
+      <span class="rotulo" style="color:var(--destaque)">A série</span>
+      <h2 class="titulo">Isso <span class="serif">funciona</span>?</h2>
+      <p class="corpo suave">Cada episódio segue o mesmo caminho, para você aprender a pensar sobre treino, e não só decorar regra.</p>
+      <ol class="passos">
+        <li>A afirmação que viralizou</li>
+        <li>O que tem de verdade nela</li>
+        <li>Onde ela erra, com a fisiologia por trás</li>
+        <li>O que fazer no lugar</li>
+      </ol>
+    </div>
+    <div class="serie__lista">
+      <div class="filtros" role="group" aria-label="Filtrar por tema">
+        <button type="button" class="filtro ativo" data-tema="todos" aria-pressed="true">Todos</button>
+        <button type="button" class="filtro" data-tema="corrida" aria-pressed="false">Começando a correr</button>
+        <button type="button" class="filtro" data-tema="forca" aria-pressed="false">Força</button>
+        <button type="button" class="filtro" data-tema="fisiologia" aria-pressed="false">Fisiologia</button>
+        <button type="button" class="filtro" data-tema="crossfit" aria-pressed="false">CrossFit</button>
+      </div>
+      <ul class="temas" id="temas">
+        <li data-tema="corrida"><span>Corrida destrói o joelho?</span><em>Começando a correr</em></li>
+        <li data-tema="corrida"><span>Alongar antes de correr previne lesão?</span><em>Começando a correr</em></li>
+        <li data-tema="fisiologia"><span>Precisa sentir dor pro treino funcionar?</span><em>Fisiologia</em></li>
+        <li data-tema="crossfit"><span>CrossFit machuca?</span><em>CrossFit</em></li>
+        <li data-tema="forca"><span>Musculação deixa lento pra correr?</span><em>Força</em></li>
+        <li data-tema="fisiologia"><span>Zona 2 resolve tudo?</span><em>Fisiologia</em></li>
+        <li data-tema="fisiologia"><span>Treinar todo dia é melhor?</span><em>Fisiologia</em></li>
+        <li data-tema="corrida"><span>Precisa de tênis caro pra começar a correr?</span><em>Começando a correr</em></li>
+      </ul>
+      <p class="semana__nota">Primeiros episódios em breve no YouTube, cada um com página e referências aqui no site.</p>
+    </div>
   </div>
 </section>
 
@@ -680,7 +796,7 @@ body::before{background:var(--noite)}
   <div class="miolo">
     <div class="contato">
       <div class="contato__pista">
-        <svg viewBox="0 0 800 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <svg id="pista-svg" viewBox="-230 -10 1080 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Pista de corrida com as áreas que a Stella trabalha: fisiologia, biomecânica, força, corrida, CrossFit e musculação">
           <g fill="none" stroke="#050c14" stroke-opacity=".28" stroke-width="1.5">
             <rect x="140" y="50"  width="520" height="280" rx="140"/>
             <rect x="158" y="68"  width="484" height="244" rx="122"/>
@@ -689,19 +805,18 @@ body::before{background:var(--noite)}
             <rect x="212" y="122" width="376" height="136" rx="68"/>
           </g>
           <path id="raia-corredor" d="M 400 50 L 520 50 A 140 140 0 0 1 520 330 L 280 330 A 140 140 0 0 1 280 50 Z" fill="none" stroke="none"/>
-          <line x1="400" y1="44" x2="400" y2="128" stroke="#f2efe7" stroke-width="3"/>
-          <circle id="corredor" r="9" fill="#c8f135" stroke="#0d1b2a" stroke-width="3" cx="400" cy="50"/>
-          <text x="400" y="200" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="44" fill="#f2efe7">400 m</text>
-          <text x="400" y="232" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="26" fill="#f2efe7" fill-opacity=".75">uma volta de cada vez</text>
+          <g id="estacoes"></g>
+          <circle id="corredor" r="9" fill="#c8f135" stroke="#050c14" stroke-width="3" cx="400" cy="50"/>
+          <text id="pista-palavra" x="400" y="198" text-anchor="middle" font-family="Syne, sans-serif" font-weight="700" font-size="46" letter-spacing="-1.5" fill="#f2efe7">400 m</text>
+          <text id="pista-frase" x="400" y="232" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="26" fill="#f2efe7" fill-opacity=".8">uma volta de cada vez</text>
         </svg>
-        <span class="pista-rotulo">Raia 1 · pista oficial</span>
       </div>
       <div class="contato__cartao">
         <div class="cabeca" style="margin:0">
           <span class="rotulo suave">Primeiro passo</span>
-          <h2 class="titulo">Sua corrida começa <span class="serif">devagar</span>.</h2>
+          <h2 class="titulo">Vamos montar o seu <span class="serif">treino</span>.</h2>
         </div>
-        <div><a class="botao botao--principal" href="#own-your-pace">Quero começar no meu ritmo</a></div>
+        <div><a class="botao botao--principal" href="https://wa.me/" target="_blank" rel="noopener">Chamar no WhatsApp</a></div>
         <dl>
           <div><dt>Instagram</dt><dd><a href="https://instagram.com/" target="_blank" rel="noopener">@stellamaz</a></dd></div>
           <div><dt>YouTube</dt><dd><a href="https://youtube.com/" target="_blank" rel="noopener">Stella Maz</a></dd></div>
@@ -718,8 +833,9 @@ body::before{background:var(--noite)}
   <div class="miolo rodape">
     <a class="assinatura" href="#inicio"><b>Stella Maz</b><span>Educação física</span></a>
     <nav aria-label="Rodapé">
-      <a href="#ofertas">Como treinar comigo</a>
+      <a href="#ofertas">Acompanhamento</a>
       <a href="#own-your-pace">Own Your Pace</a>
+      <a href="#serie">Isso funciona?</a>
       <a href="#contato">Contato</a>
       <a href="#inicio">Política de privacidade</a>
     </nav>
@@ -801,17 +917,62 @@ body::before{background:var(--noite)}
   document.getElementById('semana-prox').addEventListener('click', function(){ if(atual<semanas.length-1){atual++;desenhar();} });
   desenhar();
 
-  /* corredor na pista */
+  /* pista: estações das áreas da Stella */
   var raia = document.getElementById('raia-corredor'), cor = document.getElementById('corredor');
-  if(!calmo && raia.getTotalLength){
-    var L = raia.getTotalLength(), t1=null;
-    (function volta(t){
-      if(t1===null) t1=t;
-      var p = raia.getPointAtLength(((t-t1)/1000*60) % L);
-      cor.setAttribute('cx', p.x); cor.setAttribute('cy', p.y);
-      requestAnimationFrame(volta);
-    })(performance.now());
+  var gEst = document.getElementById('estacoes'), palavra = document.getElementById('pista-palavra'), frase = document.getElementById('pista-frase');
+  var NS = 'http://www.w3.org/2000/svg';
+  var estacoes = [
+    ['Fisiologia','o corpo se adapta em semanas'],
+    ['Biomecânica','cadência, pisada e alinhamento'],
+    ['Força','músculo forte protege articulação'],
+    ['Corrida','constância antes de distância'],
+    ['CrossFit','a escala certa para cada aluno'],
+    ['Musculação','carga que sobe sem pressa']
+  ];
+  var pistaSvg = document.getElementById('pista-svg');
+  function ajustaPista(){ pistaSvg.setAttribute('viewBox', window.matchMedia('(max-width:820px)').matches ? '-110 -20 1020 420' : '-230 -10 1080 400'); }
+  ajustaPista(); window.addEventListener('resize', ajustaPista);
+  if(raia.getTotalLength){
+    var L = raia.getTotalLength(), marcas = [], atualE = -1;
+    estacoes.forEach(function(e,i){
+      var d = L*(i+0.5)/estacoes.length, p = raia.getPointAtLength(d);
+      var c = document.createElementNS(NS,'circle'); c.setAttribute('cx',p.x); c.setAttribute('cy',p.y); c.setAttribute('r',5);
+      c.setAttribute('fill','#050c14'); c.setAttribute('stroke','#f2efe7'); c.setAttribute('stroke-width','2'); gEst.appendChild(c);
+      var dx = p.x-400, dy = p.y-190, n = Math.sqrt(dx*dx+dy*dy)||1;
+      var t = document.createElementNS(NS,'text'); t.textContent = e[0].toUpperCase();
+      t.setAttribute('x', p.x + dx/n*26); t.setAttribute('y', p.y + dy/n*22 + 4);
+      t.setAttribute('text-anchor', Math.abs(dx) < 60 ? 'middle' : (dx > 0 ? 'start' : 'end'));
+      t.setAttribute('font-family','Syne, sans-serif'); t.setAttribute('font-weight','700'); t.setAttribute('font-size','13'); t.setAttribute('letter-spacing','2');
+      t.setAttribute('fill','#f2efe7'); t.setAttribute('fill-opacity','.7'); gEst.appendChild(t);
+      marcas.push({d:d, c:c, t:t});
+    });
+    function ativar(i){
+      if(i===atualE) return; atualE = i;
+      marcas.forEach(function(m,k){ m.c.setAttribute('fill', k===i ? '#c8f135' : '#050c14'); m.t.setAttribute('fill-opacity', k===i ? '1' : '.7'); });
+      palavra.textContent = estacoes[i][0]; frase.textContent = estacoes[i][1];
+    }
+    if(!calmo){
+      var t1=null;
+      (function volta(t){
+        if(t1===null) t1=t;
+        var d = ((t-t1)/1000*55) % L, p = raia.getPointAtLength(d);
+        cor.setAttribute('cx', p.x); cor.setAttribute('cy', p.y);
+        var k = -1; marcas.forEach(function(m,j){ if(d >= m.d) k = j; });
+        if(k >= 0) ativar(k);
+        requestAnimationFrame(volta);
+      })(performance.now());
+    } else { ativar(0); }
   }
+
+  /* filtros da série */
+  var filtros = document.querySelectorAll('.filtro'), itens = document.querySelectorAll('#temas li');
+  filtros.forEach(function(f){
+    f.addEventListener('click', function(){
+      var tema = f.getAttribute('data-tema');
+      filtros.forEach(function(x){ var on = x===f; x.classList.toggle('ativo', on); x.setAttribute('aria-pressed', on); });
+      itens.forEach(function(li){ li.hidden = !(tema==='todos' || li.getAttribute('data-tema')===tema); });
+    });
+  });
 })();
 </script>
 </body>
