@@ -17,11 +17,13 @@
   --marca-creme:#f2efe7;
   --marca-neon:#c8f135;
 
-  --fundo:var(--marca-petroleo);
-  --superficie:#16293c;
+  --noite:#050c14;
+  --fundo:var(--noite);
+  --superficie:#0b1724;
   --tinta:var(--marca-creme);
-  --tinta-suave:#adafae;
-  --linha:#2c3d4f;
+  --tinta-suave:#a3a9ad;
+  --linha:#1a2a3a;
+  --oceano:#1d5d6b;
   --destaque:var(--marca-neon);
   --sobre-destaque:var(--marca-petroleo);
 
@@ -45,7 +47,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;background:var(--marca-petroleo);color:var(--marca-creme);
+  margin:0;background:var(--noite);color:var(--marca-creme);
   font-family:var(--f-texto);font-size:18px;line-height:1.6;
   -webkit-font-smoothing:antialiased;
 }
@@ -57,7 +59,7 @@ a{color:inherit}
 
 .faixa{background:var(--fundo);color:var(--tinta)}
 .grao{position:relative;isolation:isolate}
-.topo::after,.grao::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.22;mix-blend-mode:soft-light;
+body::after{content:"";position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.16;mix-blend-mode:soft-light;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .miolo{
   max-width:var(--largura);margin-inline:auto;
@@ -368,6 +370,46 @@ a{color:inherit}
 }
 @media (max-width:560px){.ofertas{grid-template-columns:minmax(0,1fr)}.ofertas .cartao{min-height:200px}}
 
+/* ---------- versão escura: petróleo fechado + brilhos neon ---------- */
+.topo{background:rgba(5,12,20,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+body::before{background:var(--noite)}
+.topo.aberto .nav{background:var(--noite)}
+.hero{padding-block:0 96px;position:relative;overflow:hidden;
+  background:
+    linear-gradient(to bottom, transparent 62%, var(--noite) 100%),
+    radial-gradient(40% 40% at 8% 74%, rgba(200,241,53,.24), transparent 72%),
+    radial-gradient(40% 45% at 96% 62%, rgba(29,93,107,.55), transparent 70%),
+    var(--noite)}
+.hero__banner{aspect-ratio:auto;height:clamp(440px,58vw,760px);min-height:0;margin-top:-72px;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 58%,transparent 100%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 58%,transparent 100%)}
+.hero__banner .foto{background:none}
+.hero__corpo{position:relative;z-index:2;margin-top:clamp(-180px,-10vw,-90px);padding-top:0}
+.letreiro{background:transparent}
+.produto{background:var(--noite);position:relative;overflow:hidden}
+.produto::before{content:"";position:absolute;width:70%;height:70%;left:15%;top:-25%;pointer-events:none;
+  background:radial-gradient(closest-side, rgba(200,241,53,.16), rgba(29,93,107,.22) 55%, transparent 100%)}
+.produto > .miolo{position:relative}
+.item{background:var(--superficie);color:var(--tinta);border:1px solid var(--linha)}
+.item__texto p{color:var(--tinta-suave)}
+.cartao{background:var(--superficie)}
+.dia__nome{background:#0d1b2a}
+.semana{background:var(--superficie)}
+.sessao--forca{background:#1a2a3a;color:var(--marca-creme)}
+.redondo--escuro{background:var(--superficie);color:var(--marca-creme);border:1px solid var(--linha)}
+.botao--escuro{background:transparent;color:var(--tinta);border-color:var(--tinta)}
+.depo figure{background:var(--superficie)}
+.contato__pista{background:
+    radial-gradient(55% 80% at 20% 100%, #c8f135 0%, rgba(200,241,53,.55) 35%, transparent 70%),
+    radial-gradient(60% 90% at 100% 20%, #1d5d6b 0%, transparent 75%),
+    #0d1b2a}
+.contato__pista .pista-rotulo{color:var(--marca-creme)}
+.contato__cartao{background:var(--noite);border:1px solid var(--linha)}
+.mural{background:var(--noite)}
+.cartao--neon{background:linear-gradient(155deg,#c8f135 0%,#b5ec4c 45%,#7fd49a 100%);border-color:transparent;color:var(--marca-petroleo)}
+.cartao--neon:hover{border-color:transparent}
+@media (max-width:820px){.hero__banner{height:clamp(380px,110vw,520px);margin-top:-64px}.hero__corpo{margin-top:-110px}}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .letreiro__trilho{animation:none}
@@ -406,8 +448,7 @@ a{color:inherit}
 <main>
 
 <!-- ===================== HERO ===================== -->
-<section class="faixa grao hero" id="inicio">
-  <div class="miolo">
+<section class="faixa hero" id="inicio">
     <div class="hero__banner">
       <div class="foto">
         <img src="img/hero-largada.jpg" alt="Mãos e tênis de uma corredora na linha de largada da pista" fetchpriority="high">
@@ -417,13 +458,14 @@ a{color:inherit}
           <path id="raia-1" d="M -80 400 C 200 120, 470 60, 700 250 S 1050 520, 1300 150"/>
           <path id="raia-2" d="M 720 -40 C 820 120, 1000 180, 1300 130"/>
         </defs>
+        <use href="#raia-1" fill="none" stroke="#0d1b2a" stroke-opacity=".82" stroke-width="112"/>
         <use href="#raia-1" fill="none" stroke="#c8f135" stroke-width="40"/>
         <text class="fita-texto" dy="7.5"><textPath id="fita-1" href="#raia-1" startOffset="0">corra no seu ritmo  ●  constância antes de distância  ●  começar não precisa doer  ●  corra no seu ritmo  ●  constância antes de distância  ●  começar não precisa doer  ●  corra no seu ritmo  ●  constância antes de distância  ●  começar não precisa doer  ●  </textPath></text>
         <use href="#raia-2" fill="none" stroke="#f2efe7" stroke-width="40"/>
         <text class="fita-texto" dy="7.5"><textPath id="fita-2" href="#raia-2" startOffset="0">técnica explicada de forma simples  ●  segurança  ●  processo  ●  técnica explicada de forma simples  ●  segurança  ●  processo  ●  </textPath></text>
       </svg>
     </div>
-
+  <div class="miolo">
     <div class="hero__corpo">
       <div class="hero__titulo">
         <span class="rotulo suave">Stella Maz · Educadora física</span>
@@ -446,7 +488,7 @@ a{color:inherit}
 </div>
 
 <!-- ===================== OFERTAS ===================== -->
-<section class="faixa claro secao" id="ofertas">
+<section class="faixa secao" id="ofertas">
   <div class="miolo">
     <div class="cabeca cabeca--linha">
       <div class="cabeca">
@@ -494,7 +536,7 @@ a{color:inherit}
 </section>
 
 <!-- ===================== SOBRE ===================== -->
-<section class="faixa grao secao" id="sobre">
+<section class="faixa secao" id="sobre">
   <div class="miolo sobre">
     <div class="foto"><img src="img/stella-contraplongee.jpg" alt="Corredora vista de baixo para cima, em plena passada" loading="lazy"></div>
     <div class="sobre__texto">
@@ -512,7 +554,7 @@ a{color:inherit}
 </section>
 
 <!-- ===================== OWN YOUR PACE ===================== -->
-<section class="faixa grao produto secao" id="own-your-pace">
+<section class="faixa produto secao" id="own-your-pace">
   <div class="miolo">
     <div class="cabeca cabeca--linha">
       <div class="cabeca">
@@ -576,7 +618,7 @@ a{color:inherit}
 </section>
 
 <!-- ===================== SEMANA DA PLANILHA ===================== -->
-<section class="faixa claro secao" id="planilha">
+<section class="faixa secao" id="planilha">
   <div class="miolo">
     <div class="cabeca">
       <span class="rotulo suave">Processo</span>
@@ -597,7 +639,7 @@ a{color:inherit}
 </section>
 
 <!-- ===================== FAIXA DE FOTO ===================== -->
-<section class="faixa grao" aria-label="Frase da Stella" style="padding-top:clamp(72px,10vw,120px)">
+<section class="faixa" aria-label="Frase da Stella" style="padding-top:clamp(72px,10vw,120px)">
   <div class="miolo">
     <figure class="mural">
       <img src="img/chegada.jpg" alt="Corredora sorrindo com os braços erguidos ao cruzar a chegada de uma prova" loading="lazy">
@@ -610,7 +652,7 @@ a{color:inherit}
 </section>
 
 <!-- ===================== DEPOIMENTOS ===================== -->
-<section class="faixa grao secao" id="depoimentos">
+<section class="faixa secao" id="depoimentos">
   <div class="miolo">
     <div class="cabeca">
       <span class="rotulo suave">Depoimentos</span>
@@ -634,12 +676,12 @@ a{color:inherit}
 </section>
 
 <!-- ===================== CTA + CONTATO ===================== -->
-<section class="faixa claro secao" id="contato">
+<section class="faixa secao" id="contato">
   <div class="miolo">
     <div class="contato">
       <div class="contato__pista">
         <svg viewBox="0 0 800 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <g fill="none" stroke="#cfc9ba" stroke-width="1.5">
+          <g fill="none" stroke="#050c14" stroke-opacity=".28" stroke-width="1.5">
             <rect x="140" y="50"  width="520" height="280" rx="140"/>
             <rect x="158" y="68"  width="484" height="244" rx="122"/>
             <rect x="176" y="86"  width="448" height="208" rx="104"/>
@@ -647,10 +689,10 @@ a{color:inherit}
             <rect x="212" y="122" width="376" height="136" rx="68"/>
           </g>
           <path id="raia-corredor" d="M 400 50 L 520 50 A 140 140 0 0 1 520 330 L 280 330 A 140 140 0 0 1 280 50 Z" fill="none" stroke="none"/>
-          <line x1="400" y1="44" x2="400" y2="128" stroke="#0d1b2a" stroke-width="3"/>
+          <line x1="400" y1="44" x2="400" y2="128" stroke="#f2efe7" stroke-width="3"/>
           <circle id="corredor" r="9" fill="#c8f135" stroke="#0d1b2a" stroke-width="3" cx="400" cy="50"/>
-          <text x="400" y="200" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="44" fill="#0d1b2a">400 m</text>
-          <text x="400" y="232" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="26" fill="#525b63">uma volta de cada vez</text>
+          <text x="400" y="200" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="44" fill="#f2efe7">400 m</text>
+          <text x="400" y="232" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="26" fill="#f2efe7" fill-opacity=".75">uma volta de cada vez</text>
         </svg>
         <span class="pista-rotulo">Raia 1 · pista oficial</span>
       </div>
