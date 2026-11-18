@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stella Maz</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Stella Maz, educadora física. Treino, corrida e fortalecimento com consciência corporal, no seu ritmo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Syne:wght@400;700;800&display=swap">
+<style>
+/* Layout: hub em faixas alternadas (petróleo / creme), grade de 12 colunas, raias de pista como grafismo.
+   Cores e tipos vêm do guia "Stella Maz - ID Visual". Tema escuro é o padrão da marca; faixas .claro trocam os tokens. */
+:root{
+  --marca-petroleo:#0d1b2a;
+  --marca-creme:#f2efe7;
+  --marca-neon:#c8f135;
+
+  --fundo:var(--marca-petroleo);
+  --superficie:#16293c;
+  --tinta:var(--marca-creme);
+  --tinta-suave:#adafae;
+  --linha:#2c3d4f;
+  --destaque:var(--marca-neon);
+  --sobre-destaque:var(--marca-petroleo);
+
+  --f-display:"Syne","Arial Black",sans-serif;
+  --f-serif:"Instrument Serif",Georgia,serif;
+  --f-texto:"Syne",system-ui,sans-serif;
+
+  --espaco-2:8px; --espaco-4:16px; --espaco-6:24px; --espaco-8:32px; --espaco-16:64px; --espaco-30:120px;
+  --raio-sm:4px; --raio-pilula:999px;
+  --largura:1240px;
+  color-scheme:dark;
+}
+.claro{
+  --fundo:var(--marca-creme);
+  --superficie:#e4dfd2;
+  --tinta:var(--marca-petroleo);
+  --tinta-suave:#525b63;
+  --linha:#cfc9ba;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--marca-petroleo);color:var(--marca-creme);
+  font-family:var(--f-texto);font-size:18px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--marca-petroleo)}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--destaque);outline-offset:3px}
+.claro :focus-visible{outline-color:var(--tinta)}
+
+.faixa{background:var(--fundo);color:var(--tinta)}
+.miolo{
+  max-width:var(--largura);margin-inline:auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+@media (min-width:720px){
+  .miolo{padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}
+}
+
+/* ---------- tipografia ---------- */
+.rotulo{font-family:var(--f-texto);font-weight:700;font-size:12px;line-height:1.2;letter-spacing:.14em;text-transform:uppercase}
+.display{font-family:var(--f-display);font-weight:800;font-size:clamp(48px,8.6vw,124px);line-height:.92;letter-spacing:-.025em;margin:0;text-wrap:balance}
+.titulo{font-family:var(--f-display);font-weight:800;font-size:clamp(32px,4.6vw,56px);line-height:1;letter-spacing:-.015em;margin:0;text-wrap:balance}
+.subtitulo{font-family:var(--f-display);font-weight:800;font-size:clamp(20px,2vw,26px);line-height:1.15;margin:0}
+.serif{font-family:var(--f-serif);font-style:italic;font-weight:400;font-size:1.06em;letter-spacing:0}
+.display .serif,.titulo .serif{color:var(--destaque)}
+.claro .titulo .serif{color:var(--tinta)}
+.corpo{font-size:18px;line-height:1.6;max-width:62ch;margin:0}
+.corpo-p{font-size:15px;line-height:1.5;margin:0}
+.suave{color:var(--tinta-suave)}
+
+/* ---------- botões e selos ---------- */
+.botao{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:48px;padding:0 24px;border-radius:var(--raio-pilula);
+  font-family:var(--f-texto);font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;
+  border:1.5px solid transparent;transition:transform .2s ease;
+}
+.botao:hover{transform:translateY(-2px)}
+.botao--principal{background:var(--destaque);color:var(--sobre-destaque)}
+.botao--contorno{background:transparent;color:var(--tinta);border-color:var(--tinta)}
+.botao--escuro{background:var(--marca-petroleo);color:var(--marca-creme)}
+.botao svg{width:16px;height:16px}
+.selo{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:var(--raio-pilula);background:var(--destaque);color:var(--sobre-destaque)}
+.selo--contorno{background:transparent;color:var(--tinta);border:1px solid var(--linha)}
+.redondo{
+  width:48px;height:48px;border-radius:50%;display:grid;place-items:center;flex:none;
+  background:var(--marca-creme);color:var(--marca-petroleo);border:0;cursor:pointer;
+}
+.redondo svg{width:18px;height:18px}
+.redondo:disabled{opacity:.35;cursor:default}
+
+/* ---------- placeholder de foto ---------- */
+.foto{
+  position:relative;overflow:hidden;background:#1a2836;color:var(--marca-creme);
+  background-image:repeating-linear-gradient(115deg,transparent 0 46px,rgba(242,239,231,.05) 46px 47px);
+}
+.foto__legenda{
+  position:absolute;left:12px;bottom:12px;right:12px;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#adafae;
+}
+.foto__legenda::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--marca-neon);margin-right:8px;vertical-align:1px}
+
+/* ---------- cabeçalho ---------- */
+.topo{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--marca-petroleo);border-bottom:1px solid var(--linha)}
+.topo__linha{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px}
+.assinatura{display:flex;flex-direction:column;text-decoration:none;line-height:1}
+.assinatura b{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.01em}
+.assinatura span{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--tinta-suave);margin-top:5px}
+.nav{display:flex;gap:28px}
+.nav a{text-decoration:none;font-size:14px;font-weight:700;color:var(--tinta-suave);padding:8px 0}
+.nav a:hover{color:var(--tinta)}
+.sociais{display:flex;gap:8px;align-items:center}
+.sociais a{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--linha);border-radius:50%}
+.sociais a:hover{border-color:var(--tinta)}
+.sociais svg{width:17px;height:17px}
+.menu-botao{display:none;background:none;border:1px solid var(--linha);color:var(--tinta);border-radius:var(--raio-pilula);height:44px;padding:0 18px;font:700 13px var(--f-texto);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+@media (max-width:900px){
+  .nav,.sociais{display:none}
+  .menu-botao{display:block}
+  .topo.aberto .nav{
+    display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;
+    background:var(--marca-petroleo);border-bottom:1px solid var(--linha);
+    padding:8px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px));
+  }
+  .topo.aberto .nav a{font-family:var(--f-display);font-weight:800;font-size:28px;color:var(--tinta);padding:10px 0;border-bottom:1px solid var(--linha)}
+}
+
+/* ---------- hero ---------- */
+.hero{padding-block:24px 56px}
+.hero__banner{position:relative;overflow:hidden;aspect-ratio:21/8;min-height:260px;width:100%;max-width:100%}
+.hero__banner .foto{position:absolute;inset:0}
+.hero__fita{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.fita-texto{font-family:var(--f-texto);font-weight:700;font-size:21px;letter-spacing:.04em;fill:var(--marca-petroleo)}
+.hero__legendas{display:flex;justify-content:space-between;gap:16px;padding-top:10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--tinta-suave)}
+.hero__corpo{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:end;padding-top:40px}
+.hero__titulo{display:flex;flex-direction:column;gap:24px;align-items:flex-start}
+.hero__lado{display:flex;flex-direction:column;gap:24px}
+.hero__cartoes{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px}
+.hero__cartoes .foto{aspect-ratio:1;min-height:0}
+.hero__cartoes .foto .foto__legenda{font-size:9px;left:8px;bottom:8px}
+.oyp{
+  background:var(--superficie);border-radius:var(--raio-sm);padding:16px 18px;
+  display:flex;flex-direction:column;justify-content:space-between;gap:12px;text-decoration:none;
+}
+.oyp__topo{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.oyp__seta{width:32px;height:32px;border-radius:50%;border:1px solid var(--linha);display:grid;place-items:center;flex:none;transition:transform .2s}
+.oyp:hover .oyp__seta{transform:rotate(-45deg);border-color:var(--tinta)}
+.oyp__seta svg{width:14px;height:14px}
+.oyp b{font-family:var(--f-display);font-weight:800;font-size:20px;line-height:1.05;display:block}
+@media (max-width:820px){
+  .hero__banner{aspect-ratio:4/3.4}
+  .hero__corpo{grid-template-columns:minmax(0,1fr);gap:28px;padding-top:28px}
+  .hero__legendas span:nth-child(2){display:none}
+}
+
+/* ---------- faixa corrida ---------- */
+.letreiro{border-block:1.5px solid var(--linha);overflow:hidden;background:var(--marca-petroleo)}
+.letreiro__trilho{display:flex;width:max-content;animation:correr 38s linear infinite}
+.letreiro__item{display:flex;align-items:center;gap:28px;padding:16px 28px 16px 0;white-space:nowrap;font-family:var(--f-display);font-weight:800;font-size:clamp(20px,2.4vw,30px)}
+.letreiro__item .serif{color:var(--destaque);font-size:1.12em}
+.letreiro__ponto{width:12px;height:12px;border-radius:50%;background:var(--destaque);flex:none}
+@keyframes correr{to{transform:translateX(-50%)}}
+
+/* ---------- ofertas (grade escalonada) ---------- */
+.secao{padding-block:clamp(72px,10vw,var(--espaco-30))}
+.cabeca{display:flex;flex-direction:column;gap:16px;margin-bottom:48px}
+.cabeca--linha{flex-direction:row;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
+.ofertas{
+  display:grid;gap:16px;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-areas:
+    "acao  c1 c2 .  "
+    "foto  c3 .  c4 ";
+}
+.ofertas__acao{grid-area:acao;align-self:end}
+.ofertas__foto{grid-area:foto}
+.ofertas .c1{grid-area:c1}.ofertas .c2{grid-area:c2}.ofertas .c3{grid-area:c3}.ofertas .c4{grid-area:c4}
+
+.cartao{
+  position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:32px;
+  min-height:260px;padding:20px;border:1px solid var(--linha);border-radius:var(--raio-sm);
+  background:var(--fundo);text-decoration:none;color:var(--tinta);transition:border-color .2s,transform .2s;
+}
+.cartao:hover{border-color:var(--tinta);transform:translateY(-3px)}
+.cartao__num{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.cartao__base{display:flex;flex-direction:column;gap:8px}
+.cartao__base p{margin:0;font-size:15px;line-height:1.5;color:var(--tinta-suave)}
+.cartao__tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.cartao--neon{
+  background:var(--marca-neon);color:var(--marca-petroleo);border-color:var(--marca-neon);
+  clip-path:polygon(0 0,52% 0,100% 30%,100% 100%,0 100%);
+}
+.cartao--neon .cartao__base p{color:var(--marca-petroleo)}
+.cartao--neon:hover{border-color:var(--marca-neon)}
+.canto-seta{
+  position:absolute;top:-10px;right:-10px;width:56px;height:56px;border-radius:50%;
+  border:1.5px solid var(--tinta);display:grid;place-items:center;background:var(--fundo);transition:transform .25s;
+}
+.canto-seta svg{width:18px;height:18px}
+.c2-envolve{position:relative;grid-area:c2}
+.c2-envolve:hover .canto-seta{transform:rotate(-45deg)}
+.ofertas__foto .foto{height:100%;min-height:300px;border-radius:var(--raio-sm)}
+@media (max-width:980px){
+  .ofertas{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"c1 c2" "c3 c4" "foto acao"}
+
+}
+@media (max-width:560px){
+  .ofertas{grid-template-columns:minmax(0,1fr);grid-template-areas:"c1" "c2" "c3" "c4" "acao"}
+  .ofertas__foto{display:none}
+  .cartao{min-height:200px}
+}
+
+/* ---------- quem é ---------- */
+.sobre{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,88px);align-items:start}
+.sobre .foto{aspect-ratio:4/5;min-height:0}
+.sobre__texto{display:flex;flex-direction:column;gap:24px}
+.credenciais{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--linha)}
+.credenciais li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--linha);align-items:baseline}
+.credenciais b{font-family:var(--f-display);font-weight:800;font-size:20px}
+.credenciais span{color:var(--tinta-suave);font-size:15px}
+.citacao{font-family:var(--f-serif);font-style:italic;font-size:clamp(26px,3vw,34px);line-height:1.2;margin:16px 0 0;color:var(--tinta)}
+.citacao::before{content:"“";color:var(--destaque)}
+.citacao::after{content:"”";color:var(--destaque)}
+@media (max-width:820px){.sobre{grid-template-columns:minmax(0,1fr)}.sobre .foto{aspect-ratio:4/3.6}}
+
+/* ---------- own your pace (carrossel) ---------- */
+.produto{background:#08121c}
+.produto__topo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:48px}
+.produto__topo .corpo{color:var(--tinta-suave)}
+.produto__preco{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px}
+.carrossel{
+  display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,calc((100% - 48px)/4));gap:16px;
+  overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px;
+}
+.carrossel::-webkit-scrollbar{display:none}
+.item{scroll-snap-align:start;background:var(--marca-creme);color:var(--marca-petroleo);border-radius:var(--raio-sm);overflow:hidden;display:flex;flex-direction:column}
+.item__capa{aspect-ratio:4/3;background:var(--superficie);color:var(--marca-creme);position:relative;display:flex;align-items:flex-end;padding:18px;overflow:hidden}
+.item__capa svg.raias{position:absolute;inset:0;width:100%;height:100%}
+.item__capa strong{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;font-family:var(--f-display);font-weight:800;font-size:72px;line-height:.85;letter-spacing:-.03em}
+.item__capa strong .serif{font-size:.5em;color:var(--marca-neon);margin-left:6px;letter-spacing:0}
+.item__texto{padding:18px 18px 22px;display:flex;flex-direction:column;gap:8px}
+.item__texto h3{margin:0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.item__texto p{margin:0;font-size:15px;line-height:1.5;color:#3c4650}
+.carrossel__controles{display:flex;justify-content:center;gap:12px;margin-top:32px}
+@media (max-width:820px){.produto__topo{grid-template-columns:minmax(0,1fr)}.carrossel{grid-auto-columns:minmax(0,82%)}}
+
+/* ---------- semana da planilha ---------- */
+.semana__barra{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px;font-weight:700;font-size:14px}
+.semana__barra .rotulo{font-size:12px}
+.semana{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border:1px solid var(--linha);border-radius:var(--raio-sm);overflow:hidden;background:var(--fundo)}
+.dia{display:flex;flex-direction:column;border-right:1px solid var(--linha);min-height:230px}
+.dia:last-child{border-right:0}
+.dia__nome{background:var(--marca-petroleo);color:var(--marca-creme);padding:18px 12px;text-align:center;font-size:14px;font-weight:700}
+.dia__corpo{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;justify-content:center}
+.sessao{display:inline-block;padding:5px 10px;border-radius:var(--raio-pilula);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.sessao--corrida{background:var(--marca-neon);color:var(--marca-petroleo)}
+.sessao--forca{background:var(--marca-petroleo);color:var(--marca-creme)}
+.sessao--mob{border:1px solid var(--tinta);color:var(--tinta)}
+.dia__det{font-size:14px;line-height:1.4;font-weight:700}
+.dia__min{font-size:13px;color:var(--tinta-suave);font-variant-numeric:tabular-nums}
+.dia--descanso .dia__corpo{color:var(--tinta-suave);font-family:var(--f-serif);font-style:italic;font-size:22px}
+.semana__rodape{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;margin-top:24px}
+.semana__rodape p{margin:0;font-size:14px;color:var(--tinta-suave);max-width:60ch}
+@media (max-width:900px){
+  .semana{grid-template-columns:minmax(0,1fr)}
+  .dia{display:grid;grid-template-columns:72px minmax(0,1fr);border-right:0;border-bottom:1px solid var(--linha);min-height:0}
+  .dia:last-child{border-bottom:0}
+  .dia__nome{display:flex;align-items:center;justify-content:center;padding:12px 6px}
+  .dia__corpo{flex-direction:row;flex-wrap:wrap;justify-content:flex-start;text-align:left;padding:14px 16px;gap:8px 12px}
+  .dia--descanso .dia__corpo{font-size:19px}
+}
+
+/* ---------- depoimentos ---------- */
+.depo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.depo figure{margin:0;padding:28px 24px;border:1px solid var(--linha);border-radius:var(--raio-sm);display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+.depo blockquote{margin:0;font-family:var(--f-serif);font-style:italic;font-size:25px;line-height:1.25}
+.depo figcaption{display:flex;gap:12px;align-items:center;font-size:14px}
+.depo figcaption i{width:40px;height:40px;border-radius:50%;background:var(--superficie);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:13px}
+.depo figcaption b{display:block}
+.depo figcaption span{color:var(--tinta-suave);font-size:13px}
+@media (max-width:900px){.depo{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- contato ---------- */
+.contato{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);align-items:center;padding-block:56px 0}
+.contato__pista{grid-column:1 / -1;grid-row:1;margin-left:16%;aspect-ratio:2.1/1;background:var(--superficie);border-radius:var(--raio-sm);overflow:hidden;position:relative}
+.contato__pista svg{position:absolute;inset:0;width:100%;height:100%}
+.contato__cartao{
+  grid-column:1;grid-row:1;position:relative;z-index:1;align-self:stretch;margin-block:48px;
+  background:var(--marca-petroleo);color:var(--marca-creme);border-radius:var(--raio-sm);
+  padding:36px 32px;display:flex;flex-direction:column;gap:28px;justify-content:center;
+}
+.contato__cartao dl{margin:0;display:flex;flex-direction:column;gap:20px}
+.contato__cartao dt{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--marca-neon)}
+.contato__cartao dd{margin:4px 0 0;font-size:15px;line-height:1.5}
+.contato__cartao dd a{text-decoration:none;border-bottom:1px solid #2c3d4f}
+.contato__cartao dd a:hover{border-color:var(--marca-neon)}
+.pista-rotulo{position:absolute;right:20px;bottom:16px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suave)}
+@media (max-width:820px){
+  .contato{grid-template-columns:minmax(0,1fr)}
+  .contato__pista{grid-row:2;margin-left:0;aspect-ratio:1.6/1}
+  .contato__cartao{grid-row:1;margin-block:0 16px}
+}
+
+/* ---------- cta final + rodapé ---------- */
+.final{text-align:center;display:flex;flex-direction:column;align-items:center;gap:28px}
+.final .corpo{color:var(--tinta-suave)}
+.rodape{border-top:1px solid var(--linha);padding-block:40px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-end}
+.rodape nav{display:flex;flex-wrap:wrap;gap:20px 28px}
+.rodape nav a{text-decoration:none;font-size:14px;color:var(--tinta-suave)}
+.rodape nav a:hover{color:var(--tinta)}
+.rodape small{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-suave)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .letreiro__trilho{animation:none}
+  .botao,.cartao,.canto-seta,.oyp__seta{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== CABEÇALHO ===================== -->
+<header class="topo" id="topo">
+  <div class="miolo topo__linha">
+    <a class="assinatura" href="#inicio" aria-label="Stella Maz, início">
+      <b>Stella Maz</b>
+      <span>Educação física</span>
+    </a>
+    <nav class="nav" id="menu" aria-label="Principal">
+      <a href="#ofertas">Como treinar comigo</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#own-your-pace">Own Your Pace</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="sociais">
+      <a href="#contato" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="#contato" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <button class="menu-botao" id="menu-botao" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== HERO ===================== -->
+<section class="faixa hero" id="inicio">
+  <div class="miolo">
+    <div class="hero__banner">
+      <div class="foto" role="img" aria-label="Espaço para foto: Stella correndo, preto e branco, de baixo para cima">
+        <span class="foto__legenda">Foto P&amp;B · Stella correndo, de baixo para cima</span>
+      </div>
+      <svg class="hero__fita" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <path id="raia-1" d="M -80 400 C 200 120, 470 60, 700 250 S 1050 520, 1300 150"/>
+          <path id="raia-2" d="M 720 -40 C 820 120, 1000 180, 1300 130"/>
+        </defs>
+        <use href="#raia-1" fill="none" stroke="#2c3d4f" stroke-width="112"/>
+        <use href="#raia-1" fill="none" stroke="#c8f135" stroke-width="40"/>
+        <text class="fita-texto" dy="7.5"><textPath id="fita-1" href="#raia-1" startOffset="0">corra no seu ritmo  ●  constância antes de distância  ●  começar não precisa doer  ●  corra no seu ritmo  ●  constância antes de distância  ●  começar não precisa doer  ●  corra no seu ritmo  ●  constância antes de distância  ●  começar não precisa doer  ●  </textPath></text>
+        <use href="#raia-2" fill="none" stroke="#f2efe7" stroke-width="40"/>
+        <text class="fita-texto" dy="7.5"><textPath id="fita-2" href="#raia-2" startOffset="0">técnica explicada de forma simples  ●  segurança  ●  processo  ●  técnica explicada de forma simples  ●  segurança  ●  processo  ●  </textPath></text>
+      </svg>
+    </div>
+    <div class="hero__legendas">
+      <span>Educadora física</span>
+      <span>Treinadora CrossFit L1</span>
+      <span>Em preparo · 30 km</span>
+    </div>
+
+    <div class="hero__corpo">
+      <div class="hero__titulo">
+        <span class="selo"><span class="rotulo">Turma fundadora · 15 vagas</span></span>
+        <h1 class="display">Evolua <span class="serif">no seu ritmo</span>.</h1>
+      </div>
+      <div class="hero__lado">
+        <p class="corpo">Sou a Stella, educadora física e treinadora. Treino com base técnica e segurança. Ajudo quem está começando a treinar e a correr com consciência corporal, sem exagero e sem medo de se machucar.</p>
+        <div class="hero__cartoes">
+          <div class="foto" role="img" aria-label="Espaço para foto: Stella treinando">
+            <span class="foto__legenda">Treino</span>
+          </div>
+          <a class="oyp" href="#own-your-pace">
+            <span class="oyp__topo">
+              <span><span class="rotulo suave">Programa</span><b>Own Your Pace</b></span>
+              <span class="oyp__seta"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+            </span>
+            <span class="corpo-p suave">Para quem nunca correu: 5 episódios em áudio, planilha com guia e encontro ao vivo.</span>
+          </a>
+        </div>
+        <div><a class="botao botao--principal" href="#own-your-pace">Quero começar no meu ritmo
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LETREIRO ===================== -->
+<div class="letreiro" aria-label="Constância antes de distância. Começar a correr não precisa doer. Turma fundadora com 15 vagas.">
+  <div class="letreiro__trilho" aria-hidden="true">
+    <div class="letreiro__item"><span>Constância antes de <span class="serif">distância</span></span><i class="letreiro__ponto"></i><span>Começar a correr não precisa doer</span><i class="letreiro__ponto"></i><span>Turma fundadora · 15 vagas · R$ 97</span><i class="letreiro__ponto"></i><span>Treinar com <span class="serif">consciência</span></span><i class="letreiro__ponto"></i></div>
+    <div class="letreiro__item"><span>Constância antes de <span class="serif">distância</span></span><i class="letreiro__ponto"></i><span>Começar a correr não precisa doer</span><i class="letreiro__ponto"></i><span>Turma fundadora · 15 vagas · R$ 97</span><i class="letreiro__ponto"></i><span>Treinar com <span class="serif">consciência</span></span><i class="letreiro__ponto"></i></div>
+  </div>
+</div>
+
+<!-- ===================== OFERTAS ===================== -->
+<section class="faixa claro secao" id="ofertas">
+  <div class="miolo">
+    <div class="cabeca">
+      <span class="rotulo suave">Como treinar comigo</span>
+      <h2 class="titulo">Quatro portas, <span class="serif">um mesmo cuidado</span>.</h2>
+    </div>
+
+    <div class="ofertas">
+      <div class="ofertas__acao"><a class="botao botao--escuro" href="#contato">Quero conversar</a></div>
+
+      <a class="cartao c1" href="#contato">
+        <span class="cartao__num">01</span>
+        <span class="cartao__base">
+          <span class="subtitulo">Coaching individual</span>
+          <p>Treino planejado para você, com acompanhamento e ajustes semana a semana.</p>
+        </span>
+      </a>
+
+      <div class="c2-envolve">
+        <a class="cartao cartao--neon" href="#own-your-pace" style="height:100%">
+          <span class="cartao__num">02</span>
+          <span class="cartao__base">
+            <span class="cartao__tag">Turma fundadora · R$ 97</span>
+            <span class="subtitulo">Own Your Pace</span>
+            <p>Comece a correr do zero, com o porquê de cada treino.</p>
+          </span>
+        </a>
+        <span class="canto-seta" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4 4 12M4 6v6h6"/></svg></span>
+      </div>
+
+      <div class="ofertas__foto">
+        <div class="foto" role="img" aria-label="Espaço para foto: Stella dando aula">
+          <span class="foto__legenda">Foto P&amp;B · Stella dando aula</span>
+        </div>
+      </div>
+
+      <a class="cartao c3" href="#conteudo">
+        <span class="cartao__num">03</span>
+        <span class="cartao__base">
+          <span class="subtitulo">Publicações</span>
+          <p>Textos curtos sobre fortalecimento, dor no começo e constância. Técnica explicada de forma simples.</p>
+        </span>
+      </a>
+
+      <a class="cartao c4" href="#conteudo">
+        <span class="cartao__num">04</span>
+        <span class="cartao__base">
+          <span class="subtitulo">YouTube</span>
+          <p>Vídeos de mobilidade, educativos de corrida e treinos de força para fazer em casa.</p>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SOBRE ===================== -->
+<section class="faixa secao" id="sobre">
+  <div class="miolo sobre">
+    <div class="foto" role="img" aria-label="Espaço para retrato da Stella, preto e branco">
+      <span class="foto__legenda">Retrato P&amp;B · contra-plongée</span>
+    </div>
+    <div class="sobre__texto">
+      <span class="rotulo suave">Quem é a Stella</span>
+      <h2 class="titulo">Aprendi a correr <span class="serif">errando</span>. Você não precisa.</h2>
+      <p class="corpo">Comecei com canelite, tênis errado e planilhas soltas da internet. Parei, voltei, parei de novo. Em 2023 terminei uma meia-maratona na teimosia, e não recomendo.</p>
+      <p class="corpo">Hoje estudo, treino e dou aula. Junto aqui o que eu gostaria de ter sabido quando comecei, com base técnica e sem promessa de milagre.</p>
+      <ul class="credenciais">
+        <li><b>Educação física</b><span>Formação completa</span></li>
+        <li><b>CrossFit L1</b><span>Treinadora certificada. Dou aula na Kyosei.</span></li>
+        <li><b>Endurance</b><span>Fortalecimento para atletas de corrida</span></li>
+        <li><b>Em preparo</b><span>Rumo aos 30 km, um treino de cada vez</span></li>
+      </ul>
+      <p class="citacao">Constância vem antes de distância.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OWN YOUR PACE ===================== -->
+<section class="faixa produto secao" id="own-your-pace">
+  <div class="miolo">
+    <div class="produto__topo">
+      <div class="cabeca" style="margin:0">
+        <span class="rotulo" style="color:var(--destaque)">Own Your Pace</span>
+        <h2 class="titulo">Comece a correr <span class="serif">sem medo</span>.</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <p class="corpo">Um programa para quem nunca correu ou já tentou e parou. Você vai caminhar mais do que correr nas primeiras semanas, e está tudo certo.</p>
+        <div class="produto__preco">
+          <span class="selo"><span class="rotulo">15 vagas · R$ 97</span></span>
+          <a class="botao botao--contorno" href="#contato">Quero entrar na turma</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="carrossel" id="carrossel" tabindex="0" aria-label="O que vem no programa">
+      <article class="item">
+        <div class="item__capa">
+          <svg class="raias" viewBox="0 0 300 225" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 200 Q 150 40 310 120" stroke="#2c3d4f" stroke-width="2" fill="none"/><path d="M-10 230 Q 150 70 310 150" stroke="#2c3d4f" stroke-width="2" fill="none"/></svg>
+          <strong>5<span class="serif">episódios</span></strong>
+        </div>
+        <div class="item__texto">
+          <h3>Podcasts guiados</h3>
+          <p>De 25 a 30 minutos cada: biomecânica, tipos de treino, dores comuns e constância.</p>
+        </div>
+      </article>
+      <article class="item">
+        <div class="item__capa">
+          <svg class="raias" viewBox="0 0 300 225" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 200 Q 150 40 310 120" stroke="#2c3d4f" stroke-width="2" fill="none"/><path d="M-10 230 Q 150 70 310 150" stroke="#2c3d4f" stroke-width="2" fill="none"/></svg>
+          <strong>1<span class="serif">planilha</span></strong>
+        </div>
+        <div class="item__texto">
+          <h3>Planilha com guia</h3>
+          <p>Plano para iniciantes com o porquê de cada sessão, para você saber o que está fazendo.</p>
+        </div>
+      </article>
+      <article class="item">
+        <div class="item__capa">
+          <svg class="raias" viewBox="0 0 300 225" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 200 Q 150 40 310 120" stroke="#2c3d4f" stroke-width="2" fill="none"/><path d="M-10 230 Q 150 70 310 150" stroke="#2c3d4f" stroke-width="2" fill="none"/></svg>
+          <strong>1<span class="serif">encontro</span></strong>
+        </div>
+        <div class="item__texto">
+          <h3>Encontro ao vivo</h3>
+          <p>Conversa em grupo comigo para tirar dúvidas, trocar experiências e ajustar o caminho.</p>
+        </div>
+      </article>
+      <article class="item">
+        <div class="item__capa">
+          <svg class="raias" viewBox="0 0 300 225" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 200 Q 150 40 310 120" stroke="#2c3d4f" stroke-width="2" fill="none"/><path d="M-10 230 Q 150 70 310 150" stroke="#2c3d4f" stroke-width="2" fill="none"/></svg>
+          <strong>CF<span class="serif">bastidores</span></strong>
+        </div>
+        <div class="item__texto">
+          <h3>Close Friends</h3>
+          <p>Bastidores dos meus treinos e dicas do dia a dia, para a turma acompanhar de perto.</p>
+        </div>
+      </article>
+    </div>
+    <div class="carrossel__controles">
+      <button class="redondo" type="button" id="carrossel-ant" aria-label="Anterior"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
+      <button class="redondo" type="button" id="carrossel-prox" aria-label="Próximo"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEMANA DA PLANILHA ===================== -->
+<section class="faixa claro secao" id="planilha">
+  <div class="miolo">
+    <div class="cabeca cabeca--linha">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span class="rotulo suave">Processo</span>
+        <h2 class="titulo">Uma semana <span class="serif">de cada vez</span>.</h2>
+        <p class="corpo suave">Veja como a planilha do Own Your Pace avança. O tempo correndo cresce devagar e o fortalecimento nunca sai da semana.</p>
+      </div>
+      <a class="botao botao--escuro" href="#own-your-pace">Ver o programa</a>
+    </div>
+
+    <div class="semana__barra">
+      <span class="rotulo" id="semana-rotulo">Semana 1</span>
+      <span id="semana-resumo" class="suave">Corrida 1 min · caminhada 2 min</span>
+    </div>
+    <div class="semana" id="semana" aria-live="polite"></div>
+
+    <div class="semana__rodape">
+      <p>Exemplo ilustrativo. A planilha real vem com o guia explicando cada sessão e quando ajustar.</p>
+      <div style="display:flex;gap:12px">
+        <button class="redondo" type="button" id="semana-ant" aria-label="Semana anterior" style="background:var(--marca-petroleo);color:var(--marca-creme)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
+        <button class="redondo" type="button" id="semana-prox" aria-label="Próxima semana" style="background:var(--marca-petroleo);color:var(--marca-creme)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DEPOIMENTOS ===================== -->
+<section class="faixa secao" id="depoimentos">
+  <div class="miolo">
+    <div class="cabeca">
+      <span class="rotulo suave">Depoimentos</span>
+      <h2 class="titulo">Quem já treina <span class="serif">sente a diferença</span>.</h2>
+    </div>
+    <div class="depo">
+      <figure>
+        <blockquote>Me deu a clareza que eu precisava para começar a correr sem medo.</blockquote>
+        <figcaption><i>JR</i><span><b>Juliana R.</b><span>Iniciante · São Paulo</span></span></figcaption>
+      </figure>
+      <figure>
+        <blockquote>A planilha me ajudou a criar constância sem me cobrar demais.</blockquote>
+        <figcaption><i>MS</i><span><b>Marcos S.</b><span>Iniciante · Curitiba</span></span></figcaption>
+      </figure>
+      <figure>
+        <blockquote>Um conteúdo que fala a minha língua e respeita o meu ritmo.</blockquote>
+        <figcaption><i>RT</i><span><b>Renata T.</b><span>Retomando · Belo Horizonte</span></span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA + CONTATO ===================== -->
+<section class="faixa claro secao" id="contato">
+  <div class="miolo">
+    <div class="final" id="conteudo">
+      <span class="rotulo suave">Primeiro passo</span>
+      <h2 class="titulo">Sua corrida começa <span class="serif">devagar</span>.</h2>
+      <p class="corpo">Sem pressa e sem cobrança. Me chama para conversar sobre coaching ou entre na turma fundadora do Own Your Pace.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+        <a class="botao botao--principal" href="#own-your-pace">Quero começar no meu ritmo</a>
+      </div>
+    </div>
+
+    <div class="contato">
+      <div class="contato__pista">
+        <svg viewBox="0 0 800 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <g fill="none" stroke="#cfc9ba" stroke-width="1.5">
+            <rect x="140" y="50"  width="520" height="280" rx="140"/>
+            <rect x="158" y="68"  width="484" height="244" rx="122"/>
+            <rect x="176" y="86"  width="448" height="208" rx="104"/>
+            <rect x="194" y="104" width="412" height="172" rx="86"/>
+            <rect x="212" y="122" width="376" height="136" rx="68"/>
+          </g>
+          <path id="raia-corredor" d="M 400 50 L 520 50 A 140 140 0 0 1 520 330 L 280 330 A 140 140 0 0 1 280 50 Z" fill="none" stroke="none"/>
+          <line x1="400" y1="44" x2="400" y2="128" stroke="#0d1b2a" stroke-width="3"/>
+          <circle id="corredor" r="9" fill="#c8f135" stroke="#0d1b2a" stroke-width="3" cx="400" cy="50"/>
+          <text x="400" y="200" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="44" fill="#0d1b2a">400 m</text>
+          <text x="400" y="232" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="26" fill="#525b63">uma volta de cada vez</text>
+        </svg>
+        <span class="pista-rotulo">Raia 1 · pista oficial</span>
+      </div>
+      <div class="contato__cartao">
+        <h3 class="subtitulo" style="font-size:30px">Vamos conversar</h3>
+        <dl>
+          <div><dt>Instagram</dt><dd><a href="https://instagram.com/" target="_blank" rel="noopener">@stellamaz</a></dd></div>
+          <div><dt>YouTube</dt><dd><a href="https://youtube.com/" target="_blank" rel="noopener">Stella Maz</a></dd></div>
+          <div><dt>Onde eu treino e dou aula</dt><dd>Kyosei, box de CrossFit</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="faixa">
+  <div class="miolo rodape">
+    <a class="assinatura" href="#inicio"><b>Stella Maz</b><span>Educação física</span></a>
+    <nav aria-label="Rodapé">
+      <a href="#ofertas">Como treinar comigo</a>
+      <a href="#own-your-pace">Own Your Pace</a>
+      <a href="#contato">Contato</a>
+      <a href="#inicio">Política de privacidade</a>
+    </nav>
+    <small>© 2026 Stella Maz</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var calmo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* menu mobile */
+  var topo = document.getElementById('topo'), mb = document.getElementById('menu-botao');
+  mb.addEventListener('click', function(){
+    var aberto = topo.classList.toggle('aberto');
+    mb.setAttribute('aria-expanded', aberto);
+    mb.textContent = aberto ? 'Fechar' : 'Menu';
+  });
+  document.querySelectorAll('#menu a').forEach(function(a){
+    a.addEventListener('click', function(){ topo.classList.remove('aberto'); mb.setAttribute('aria-expanded', false); mb.textContent='Menu'; });
+  });
+
+  /* fita do hero correndo pela raia */
+  if(!calmo){
+    var fitas = [document.getElementById('fita-1'), document.getElementById('fita-2')];
+    var vel = [38, 30], ciclo = [0,0];
+    fitas.forEach(function(f,i){
+      try{ ciclo[i] = f.parentNode.getComputedTextLength() / (i===0 ? 3 : 2); }catch(e){ ciclo[i]=0; }
+    });
+    var t0 = null;
+    function passo(t){
+      if(t0===null) t0=t;
+      var s=(t-t0)/1000;
+      fitas.forEach(function(f,i){ if(ciclo[i]) f.setAttribute('startOffset', -((s*vel[i]) % ciclo[i])); });
+      requestAnimationFrame(passo);
+    }
+    requestAnimationFrame(passo);
+  }
+
+  /* carrossel */
+  var car = document.getElementById('carrossel');
+  function passoCar(){ var it = car.querySelector('.item'); return it ? it.getBoundingClientRect().width + 16 : 300; }
+  document.getElementById('carrossel-ant').addEventListener('click', function(){ car.scrollBy({left:-passoCar(), behavior: calmo?'auto':'smooth'}); });
+  document.getElementById('carrossel-prox').addEventListener('click', function(){ car.scrollBy({left:passoCar(), behavior: calmo?'auto':'smooth'}); });
+
+  /* semana da planilha (exemplo) */
+  var dias = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+  var semanas = [
+    {resumo:'Corrida 1 min · caminhada 2 min', s:[
+      ['corrida','1′ corre · 2′ caminha × 8','24 min'],['forca','Fortalecimento A','25 min'],null,
+      ['corrida','1′ corre · 2′ caminha × 8','24 min'],['mob','Mobilidade','15 min'],['corrida','Caminhada leve','30 min'],null]},
+    {resumo:'Corrida 2 min · caminhada 2 min', s:[
+      ['corrida','2′ corre · 2′ caminha × 6','24 min'],['forca','Fortalecimento B','25 min'],null,
+      ['corrida','2′ corre · 2′ caminha × 6','24 min'],['mob','Mobilidade','15 min'],['corrida','Caminhada leve','35 min'],null]},
+    {resumo:'Corrida 3 min · caminhada 2 min', s:[
+      ['corrida','3′ corre · 2′ caminha × 5','25 min'],['forca','Fortalecimento A','30 min'],null,
+      ['corrida','3′ corre · 2′ caminha × 5','25 min'],['mob','Mobilidade','15 min'],['corrida','3′ corre · 2′ caminha × 4','20 min'],null]},
+    {resumo:'Semana mais leve para absorver', s:[
+      ['corrida','2′ corre · 2′ caminha × 5','20 min'],['forca','Fortalecimento B','25 min'],null,
+      ['mob','Mobilidade','20 min'],null,['corrida','Caminhada leve','30 min'],null]}
+  ];
+  var nomes = {corrida:'Corrida', forca:'Força', mob:'Mobilidade'};
+  var atual = 0, el = document.getElementById('semana');
+  function desenhar(){
+    var w = semanas[atual];
+    document.getElementById('semana-rotulo').textContent = 'Semana ' + (atual+1) + ' de ' + semanas.length;
+    document.getElementById('semana-resumo').textContent = w.resumo;
+    el.innerHTML = dias.map(function(d,i){
+      var x = w.s[i];
+      if(!x) return '<div class="dia dia--descanso"><div class="dia__nome">'+d+'</div><div class="dia__corpo">descanso</div></div>';
+      return '<div class="dia"><div class="dia__nome">'+d+'</div><div class="dia__corpo">'+
+        '<span class="sessao sessao--'+x[0]+'">'+nomes[x[0]]+'</span>'+
+        '<span class="dia__det">'+x[1]+'</span><span class="dia__min">'+x[2]+'</span></div></div>';
+    }).join('');
+    document.getElementById('semana-ant').disabled = atual===0;
+    document.getElementById('semana-prox').disabled = atual===semanas.length-1;
+  }
+  document.getElementById('semana-ant').addEventListener('click', function(){ if(atual>0){atual--;desenhar();} });
+  document.getElementById('semana-prox').addEventListener('click', function(){ if(atual<semanas.length-1){atual++;desenhar();} });
+  desenhar();
+
+  /* corredor na pista */
+  var raia = document.getElementById('raia-corredor'), cor = document.getElementById('corredor');
+  if(!calmo && raia.getTotalLength){
+    var L = raia.getTotalLength(), t1=null;
+    (function volta(t){
+      if(t1===null) t1=t;
+      var p = raia.getPointAtLength(((t-t1)/1000*60) % L);
+      cor.setAttribute('cx', p.x); cor.setAttribute('cy', p.y);
+      requestAnimationFrame(volta);
+    })(performance.now());
+  }
+})();
+</script>
+</body>
+</html>
