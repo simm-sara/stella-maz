@@ -480,6 +480,11 @@ body::before{background:var(--noite)}
 .pilar:hover{border-color:rgba(200,241,53,.35);transform:translateY(-3px)}
 @media (prefers-reduced-motion:reduce){.pilar{transition:none}}
 
+/* ---------- retrato no contato ---------- */
+.contato__retrato{margin:-40px -36px 0;aspect-ratio:4/3.3;overflow:hidden;border-radius:var(--raio-sm) var(--raio-sm) 0 0}
+.contato__retrato img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.sobre .foto img{object-position:center 35%}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .letreiro__trilho{animation:none}
@@ -662,7 +667,7 @@ body::before{background:var(--noite)}
 <!-- ===================== SOBRE ===================== -->
 <section class="faixa secao" id="sobre">
   <div class="miolo sobre">
-    <div class="foto"><img src="img/stella-contraplongee.jpg" alt="Atleta vista de baixo para cima, em plena passada" loading="lazy"></div>
+    <div class="foto"><img src="img/stella-correndo.jpg" alt="Stella Maz correndo na rua, vista de baixo para cima" loading="lazy"></div>
     <div class="sobre__texto">
       <span class="rotulo suave">Quem é a Stella</span>
       <h2 class="titulo">Estudo o corpo para você treinar <span class="serif">por anos</span>.</h2>
@@ -859,6 +864,7 @@ body::before{background:var(--noite)}
         </svg>
       </div>
       <div class="contato__cartao">
+        <div class="contato__retrato"><img src="img/stella-retrato.jpg" alt="Retrato de Stella Maz sorrindo" loading="lazy"></div>
         <div class="cabeca" style="margin:0">
           <span class="rotulo suave">Primeiro passo</span>
           <h2 class="titulo">Treine com quem explica o <span class="serif">porquê</span>.</h2>
