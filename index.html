@@ -463,6 +463,11 @@ body::before{background:var(--noite)}
   .fases li.ativa span{color:var(--destaque)}
 }
 
+/* ---------- logo ---------- */
+.logo{display:block;height:46px;width:auto}
+.logo--rodape{height:52px}
+@media (max-width:560px){.logo{height:32px}.logo--rodape{height:44px}}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .letreiro__trilho{animation:none}
@@ -476,8 +481,7 @@ body::before{background:var(--noite)}
 <header class="topo" id="topo">
   <div class="miolo topo__linha">
     <a class="assinatura" href="#inicio" aria-label="Stella Maz, início">
-      <b>Stella Maz</b>
-      <span>Educação física</span>
+      <img class="logo" src="img/logo-branco.svg" alt="Stella Maz · Biomecânica e bem-estar" width="763" height="209">
     </a>
     <nav class="nav" id="menu" aria-label="Principal">
       <a href="#ofertas">Como treinar comigo</a>
@@ -847,7 +851,7 @@ body::before{background:var(--noite)}
           <span class="rotulo suave">Primeiro passo</span>
           <h2 class="titulo">Treine com quem explica o <span class="serif">porquê</span>.</h2>
         </div>
-        <div><a class="botao botao--principal" href="https://wa.me/" target="_blank" rel="noopener">Falar com a Stella no WhatsApp</a></div>
+        <div><a class="botao botao--principal" href="https://wa.me/" target="_blank" rel="noopener">Começar o aquecimento <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
         <dl>
           <div><dt>Instagram</dt><dd><a href="https://instagram.com/" target="_blank" rel="noopener">@stellamaz</a></dd></div>
           <div><dt>YouTube</dt><dd><a href="https://youtube.com/" target="_blank" rel="noopener">Stella Maz</a></dd></div>
@@ -862,7 +866,7 @@ body::before{background:var(--noite)}
 
 <footer class="faixa">
   <div class="miolo rodape">
-    <a class="assinatura" href="#inicio"><b>Stella Maz</b><span>Educação física</span></a>
+    <a class="assinatura" href="#inicio" aria-label="Stella Maz, início"><img class="logo logo--rodape" src="img/logo-branco.svg" alt="Stella Maz · Biomecânica e bem-estar" width="763" height="209" loading="lazy"></a>
     <nav aria-label="Rodapé">
       <a href="#ofertas">Acompanhamento</a>
       <a href="#own-your-pace">Own Your Pace</a>
