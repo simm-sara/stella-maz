@@ -441,6 +441,28 @@ body::before{background:var(--noite)}
 @media (max-width:820px){#estacoes text{font-size:21px;letter-spacing:1px}.contato__pista{aspect-ratio:1.35/1}}
 @media (max-width:560px){.pilares{grid-template-columns:minmax(0,1fr)}.temas li{flex-direction:column;gap:6px}}
 
+/* ---------- planejamento ---------- */
+.plano{position:relative;overflow:hidden}
+.plano::before{content:"";position:absolute;width:60%;height:80%;right:-15%;bottom:-30%;pointer-events:none;
+  background:radial-gradient(closest-side, rgba(200,241,53,.13), rgba(29,93,107,.2) 55%, transparent 100%)}
+.plano > .miolo{position:relative}
+.plano__texto{max-width:36ch}
+.plano__grafico{display:flex;flex-direction:column;gap:0}
+#plano-svg{width:100%;height:auto;display:block}
+.plano__barra{fill:#1a2a3a;transition:fill .35s ease}
+.plano__barra.feita{fill:#f2efe7}
+.plano__barra.agora{fill:#c8f135}
+.fases{list-style:none;margin:0;padding:0 calc(40/1200*100%);display:flex}
+.fases li{flex:var(--p) 1 0;min-width:0;border-top:1px solid #2c3d4f;padding:14px 6px 0 0;margin-right:6px}
+.fases li span{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suave)}
+.fases li.ativa{border-top-color:var(--destaque)}
+.fases li.ativa span{color:var(--tinta)}
+@media (max-width:720px){
+  .fases{flex-wrap:wrap;gap:10px 18px;padding:18px 0 0}
+  .fases li{flex:0 0 auto;border:0;padding:0;margin:0}
+  .fases li.ativa span{color:var(--destaque)}
+}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .letreiro__trilho{animation:none}
@@ -576,7 +598,6 @@ body::before{background:var(--noite)}
         <svg class="pilar__arte" viewBox="0 0 240 120" aria-hidden="true">
           <line x1="0" y1="70" x2="240" y2="70" stroke="#1a2a3a" stroke-width="1"/>
           <path class="pulso" d="M0 70 H52 L62 70 L70 52 L78 70 L88 70 L96 18 L106 104 L114 70 L132 70 L142 58 L154 70 H240" fill="none" stroke="#c8f135" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
-          <text x="0" y="112" fill="#a3a9ad" font-size="11" font-family="Syne, sans-serif" letter-spacing="1.2">FC · ADAPTAÇÃO</text>
         </svg>
         <h3 class="subtitulo">Fisiologia aplicada</h3>
         <p>O que muda no corpo nas primeiras semanas de treino, e por que o resultado leva tempo.</p>
@@ -591,7 +612,6 @@ body::before{background:var(--noite)}
           <circle cx="124" cy="74" r="6" fill="#c8f135"/>
           <circle cx="104" cy="112" r="5" fill="#050c14" stroke="#f2efe7" stroke-width="2"/>
           <text x="160" y="86" fill="#c8f135" font-size="20" font-family="Syne, sans-serif" font-weight="700">92°</text>
-          <text x="160" y="104" fill="#a3a9ad" font-size="11" font-family="Syne, sans-serif" letter-spacing="1.2">JOELHO</text>
         </svg>
         <h3 class="subtitulo">Biomecânica</h3>
         <p>Cadência, pisada e alinhamento: como o movimento distribui a carga nas articulações.</p>
@@ -630,7 +650,7 @@ body::before{background:var(--noite)}
     <div class="sobre__texto">
       <span class="rotulo suave">Quem é a Stella</span>
       <h2 class="titulo">Estudo o corpo para você treinar <span class="serif">por anos</span>.</h2>
-      <p class="corpo">Sou educadora física e treinadora de CrossFit. Trabalho força, corrida e musculação com base em fisiologia. Também errei muito no começo, e é por isso que explico o porquê de cada treino.</p>
+      <p class="corpo">Sou educadora física e treinadora de CrossFit. Trabalho força, corrida e musculação com base em ciência. Também errei muito no começo, e é por isso que explico o porquê de cada treino.</p>
       <ul class="credenciais">
         <li><b>Educação física</b><span>Formação completa</span></li>
         <li><b>CrossFit L1</b><span>Treinadora na Kyosei</span></li>
@@ -703,16 +723,27 @@ body::before{background:var(--noite)}
       <button class="redondo" type="button" id="carrossel-prox" aria-label="Próximo"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>
     </div>
 
-    <div class="semana-bloco">
-      <div class="semana__barra">
-        <span><span class="rotulo" id="semana-rotulo">Semana 1</span> <span id="semana-resumo" class="suave">Corrida 1 min · caminhada 2 min</span></span>
-        <span class="semana__setas">
-          <button class="redondo redondo--escuro" type="button" id="semana-ant" aria-label="Semana anterior"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
-          <button class="redondo redondo--escuro" type="button" id="semana-prox" aria-label="Próxima semana"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>
-        </span>
+  </div>
+</section>
+
+<!-- ===================== PLANEJAMENTO ===================== -->
+<section class="faixa secao plano" id="planejamento">
+  <div class="miolo">
+    <div class="cabeca cabeca--linha">
+      <div class="cabeca">
+        <span class="rotulo suave">Planejamento</span>
+        <h2 class="titulo">Cada fase tem um <span class="serif">porquê</span>.</h2>
       </div>
-      <div class="semana" id="semana" aria-live="polite"></div>
-      <p class="semana__nota">Uma semana da planilha, como exemplo. O tempo correndo cresce devagar e o fortalecimento nunca sai da semana.</p>
+      <p class="corpo suave plano__texto">Antes do primeiro treino existe um plano. Vale para corrida, CrossFit ou musculação.</p>
+    </div>
+    <div class="plano__grafico">
+      <svg id="plano-svg" viewBox="0 0 1200 270" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Carga de treino ao longo de 16 semanas, subindo por fases, com uma semana de ajuste antes da evolução">
+        <g stroke="#1a2a3a" stroke-width="1"><line x1="40" y1="250" x2="1160" y2="250"/><line x1="40" y1="140" x2="1160" y2="140" stroke-dasharray="2 6"/><line x1="40" y1="30" x2="1160" y2="30" stroke-dasharray="2 6"/></g>
+        <polyline points="75,188 145,179 215,161 285,144 355,126 425,113 495,100 565,82 635,69 705,56 775,42 845,126 915,78 985,60 1055,38 1125,20" fill="none" stroke="#c8f135" stroke-opacity=".55" stroke-width="1.5" stroke-dasharray="4 6"/>
+        <g id="plano-barras"><rect class="plano__barra" x="58" y="202" width="34" height="48" rx="2"/><rect class="plano__barra" x="128" y="193" width="34" height="57" rx="2"/><rect class="plano__barra" x="198" y="175" width="34" height="75" rx="2"/><rect class="plano__barra" x="268" y="158" width="34" height="92" rx="2"/><rect class="plano__barra" x="338" y="140" width="34" height="110" rx="2"/><rect class="plano__barra" x="408" y="127" width="34" height="123" rx="2"/><rect class="plano__barra" x="478" y="114" width="34" height="136" rx="2"/><rect class="plano__barra" x="548" y="96" width="34" height="154" rx="2"/><rect class="plano__barra" x="618" y="83" width="34" height="167" rx="2"/><rect class="plano__barra" x="688" y="70" width="34" height="180" rx="2"/><rect class="plano__barra" x="758" y="56" width="34" height="194" rx="2"/><rect class="plano__barra" x="828" y="140" width="34" height="110" rx="2"/><rect class="plano__barra" x="898" y="92" width="34" height="158" rx="2"/><rect class="plano__barra" x="968" y="74" width="34" height="176" rx="2"/><rect class="plano__barra" x="1038" y="52" width="34" height="198" rx="2"/><rect class="plano__barra" x="1108" y="34" width="34" height="216" rx="2"/></g>
+        <line id="plano-cursor" x1="75" y1="18" x2="75" y2="256" stroke="#c8f135" stroke-width="1.5"/>
+      </svg>
+      <ol class="fases"><li style="--p:2"><span>Avaliação</span></li><li style="--p:4"><span>Base</span></li><li style="--p:5"><span>Progressão</span></li><li style="--p:1"><span>Ajuste</span></li><li style="--p:4"><span>Evolução</span></li></ol>
     </div>
   </div>
 </section>
@@ -724,7 +755,7 @@ body::before{background:var(--noite)}
       <img src="img/chegada.jpg" alt="Atleta sorrindo com os braços erguidos ao cruzar a chegada de uma prova" loading="lazy">
       <figcaption>
         <span class="rotulo">Stella Maz</span>
-        <p class="mural__frase">Fisiologia,<br>não <span class="serif">tendência</span>.</p>
+        <p class="mural__frase">Ciência,<br>não <span class="serif">tendência</span>.</p>
       </figcaption>
     </figure>
   </div>
@@ -814,9 +845,9 @@ body::before{background:var(--noite)}
       <div class="contato__cartao">
         <div class="cabeca" style="margin:0">
           <span class="rotulo suave">Primeiro passo</span>
-          <h2 class="titulo">Vamos montar o seu <span class="serif">treino</span>.</h2>
+          <h2 class="titulo">Treine com quem explica o <span class="serif">porquê</span>.</h2>
         </div>
-        <div><a class="botao botao--principal" href="https://wa.me/" target="_blank" rel="noopener">Chamar no WhatsApp</a></div>
+        <div><a class="botao botao--principal" href="https://wa.me/" target="_blank" rel="noopener">Falar com a Stella no WhatsApp</a></div>
         <dl>
           <div><dt>Instagram</dt><dd><a href="https://instagram.com/" target="_blank" rel="noopener">@stellamaz</a></dd></div>
           <div><dt>YouTube</dt><dd><a href="https://youtube.com/" target="_blank" rel="noopener">Stella Maz</a></dd></div>
@@ -881,41 +912,20 @@ body::before{background:var(--noite)}
   document.getElementById('carrossel-ant').addEventListener('click', function(){ car.scrollBy({left:-passoCar(), behavior: calmo?'auto':'smooth'}); });
   document.getElementById('carrossel-prox').addEventListener('click', function(){ car.scrollBy({left:passoCar(), behavior: calmo?'auto':'smooth'}); });
 
-  /* semana da planilha (exemplo) */
-  var dias = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
-  var semanas = [
-    {resumo:'Corrida 1 min · caminhada 2 min', s:[
-      ['corrida','1′ corre · 2′ caminha × 8','24 min'],['forca','Fortalecimento A','25 min'],null,
-      ['corrida','1′ corre · 2′ caminha × 8','24 min'],['mob','Mobilidade','15 min'],['corrida','Caminhada leve','30 min'],null]},
-    {resumo:'Corrida 2 min · caminhada 2 min', s:[
-      ['corrida','2′ corre · 2′ caminha × 6','24 min'],['forca','Fortalecimento B','25 min'],null,
-      ['corrida','2′ corre · 2′ caminha × 6','24 min'],['mob','Mobilidade','15 min'],['corrida','Caminhada leve','35 min'],null]},
-    {resumo:'Corrida 3 min · caminhada 2 min', s:[
-      ['corrida','3′ corre · 2′ caminha × 5','25 min'],['forca','Fortalecimento A','30 min'],null,
-      ['corrida','3′ corre · 2′ caminha × 5','25 min'],['mob','Mobilidade','15 min'],['corrida','3′ corre · 2′ caminha × 4','20 min'],null]},
-    {resumo:'Semana mais leve para absorver', s:[
-      ['corrida','2′ corre · 2′ caminha × 5','20 min'],['forca','Fortalecimento B','25 min'],null,
-      ['mob','Mobilidade','20 min'],null,['corrida','Caminhada leve','30 min'],null]}
-  ];
-  var nomes = {corrida:'Corrida', forca:'Força', mob:'Mobilidade'};
-  var atual = 0, el = document.getElementById('semana');
-  function desenhar(){
-    var w = semanas[atual];
-    document.getElementById('semana-rotulo').textContent = 'Semana ' + (atual+1) + ' de ' + semanas.length;
-    document.getElementById('semana-resumo').textContent = w.resumo;
-    el.innerHTML = dias.map(function(d,i){
-      var x = w.s[i];
-      if(!x) return '<div class="dia dia--descanso"><div class="dia__nome">'+d+'</div><div class="dia__corpo">descanso</div></div>';
-      return '<div class="dia"><div class="dia__nome">'+d+'</div><div class="dia__corpo">'+
-        '<span class="sessao sessao--'+x[0]+'">'+nomes[x[0]]+'</span>'+
-        '<span class="dia__det">'+x[1]+'</span><span class="dia__min">'+x[2]+'</span></div></div>';
-    }).join('');
-    document.getElementById('semana-ant').disabled = atual===0;
-    document.getElementById('semana-prox').disabled = atual===semanas.length-1;
+
+  /* planejamento: cursor percorre as semanas */
+  var barras = document.querySelectorAll('.plano__barra'), cursor = document.getElementById('plano-cursor'), fasesLi = document.querySelectorAll('.fases li');
+  var limites = [2,6,11,12,16];
+  function semana(i){
+    barras.forEach(function(b,k){ b.classList.toggle('feita', k<i); b.classList.toggle('agora', k===i); });
+    cursor.setAttribute('x1', 75+i*70); cursor.setAttribute('x2', 75+i*70);
+    var f = 0; while(i >= limites[f]) f++;
+    fasesLi.forEach(function(li,k){ li.classList.toggle('ativa', k===f); });
   }
-  document.getElementById('semana-ant').addEventListener('click', function(){ if(atual>0){atual--;desenhar();} });
-  document.getElementById('semana-prox').addEventListener('click', function(){ if(atual<semanas.length-1){atual++;desenhar();} });
-  desenhar();
+  if(barras.length){
+    if(calmo){ semana(barras.length-1); }
+    else { var sem = 0; semana(0); setInterval(function(){ sem = (sem+1) % (barras.length+3); semana(Math.min(sem, barras.length-1)); }, 650); }
+  }
 
   /* pista: estações das áreas da Stella */
   var raia = document.getElementById('raia-corredor'), cor = document.getElementById('corredor');
